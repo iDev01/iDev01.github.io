@@ -3,7 +3,7 @@
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="utf-8">
   
-  <title>【已解决】Tengine启动报错nginx: [emerg] invalid port in resolver &#34;2001:4860:4860::8844&#34; in /usr/local/nginx | iDev_01 | iDev01</title>
+  <title>【已解决】Tengine启动报错nginx: [emerg] invalid port in resolver &#34;2001:4860:4860::8844&#34; in /usr/local/nginx | iDev_01 | 一次选择产生的蝴蝶效应，足够影响一生。</title>
 
   
   <meta name="author" content="iDev_01">
@@ -44,7 +44,7 @@
     <h1 class="site-title">
       <a href="/">iDev_01</a>
     </h1>
-    <p class="site-description">iDev01</p>
+    <p class="site-description">一次选择产生的蝴蝶效应，足够影响一生。</p>
   </div>
   <nav class="site-navigation">
     <ul>
@@ -84,7 +84,9 @@
   <div class="article-content">
     <div class="entry">
       
-        <p>启动Tengine服务的时候报错：<br><code>nginx: [emerg] invalid port in resolver &quot;2001:4860:4860::8844&quot; in /usr/local/nginx-generic-1.6.0/conf/nginx.conf</code><br>原因：ipv6导致<br>解决方法：在安装的时候就要加上参数<br><code>./configure --with-ipv6</code><br>然后<br><code>make &amp;&amp; make install</code></p>
+        <h1 id="现象"><a href="#现象" class="headerlink" title="现象"></a>现象</h1><p>启动Tengine服务的时候报错：<br><code>nginx: [emerg] invalid port in resolver &quot;2001:4860:4860::8844&quot; in /usr/local/nginx-generic-1.6.0/conf/nginx.conf</code><br><a id="more"></a></p>
+<h1 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h1><p>ipv6导致</p>
+<h1 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h1><p>在安装的时候就要加上参数<br><code>./configure --with-ipv6</code><br>然后<br><code>make &amp;&amp; make install</code></p>
 
       
     </div>

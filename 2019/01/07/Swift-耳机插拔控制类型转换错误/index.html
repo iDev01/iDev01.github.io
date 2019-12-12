@@ -1,0 +1,153 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>Swift 耳机插拔控制类型转换错误 | iDev_01 | 一次选择产生的蝴蝶效应，足够影响一生。</title>
+
+  
+  <meta name="author" content="iDev_01">
+  
+
+  
+  <meta name="description" content="一个iOS开发者的小站">
+  
+
+  
+  <meta name="keywords" content="iDev_01, iOS, 马浩">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="Swift 耳机插拔控制类型转换错误">
+
+  <meta property="og:site_name" content="iDev_01">
+
+  
+  <meta property="og:image" content="/favicon.ico">
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="iDev_01" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">iDev_01</a>
+    </h1>
+    <p class="site-description">一次选择产生的蝴蝶效应，足够影响一生。</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/archives">Archives</a></li>
+      
+        <li><a href="/about">About</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>Swift 耳机插拔控制类型转换错误</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2019/01/07/Swift-耳机插拔控制类型转换错误/" rel="bookmark">
+        <time class="entry-date published" datetime="2019-01-07T06:41:55.000Z">
+          2019-01-07
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h1 id="现象"><a href="#现象" class="headerlink" title="现象"></a>现象</h1><p>我们判断耳机拔出需要订阅一个 <code>AVAudioSession.routeChangeNotification</code>通知<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">NotificationCenter</span>.<span class="keyword">default</span>.addObserver(<span class="keyword">self</span>, selector: #selector(<span class="type">Test</span>.handleRouteChange(notification:)), name: <span class="type">AVAudioSession</span>.routeChangeNotification, object: <span class="type">AVAudioSession</span>.sharedInstance())</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@objc</span> <span class="function"><span class="keyword">func</span> <span class="title">handleRouteChange</span><span class="params">(notification: Notification)</span></span> -&gt; <span class="type">Void</span> &#123;</span><br><span class="line">	<span class="keyword">if</span> <span class="keyword">let</span> userInfo = notification.userInfo,</span><br><span class="line">	   <span class="keyword">let</span> changeResonNumber = userInfo[<span class="type">AVAudioSessionRouteChangeReasonKey</span>] <span class="keyword">as</span>? <span class="type">AVAudioSession</span>.<span class="type">RouteChangeReason</span> ,</span><br><span class="line">	   <span class="keyword">let</span> changeResonDescription = userInfo[<span class="type">AVAudioSessionRouteChangePreviousRouteKey</span>] <span class="keyword">as</span>? [<span class="type">AVAudioSessionPortDescription</span>] &#123;</span><br><span class="line">	    <span class="built_in">print</span>(changeReson)</span><br><span class="line">	    <span class="keyword">switch</span> changeReson &#123;</span><br><span class="line">	    <span class="keyword">case</span> .oldDeviceUnavailable:</span><br><span class="line">		    <span class="keyword">if</span> changeResonDescription[<span class="number">1</span>].portType == <span class="type">AVAudioSession</span>.<span class="type">Port</span>.headphones &#123;</span><br><span class="line">				<span class="keyword">self</span>.player.pause()</span><br><span class="line">	    	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		  		<span class="keyword">self</span>.player.resume()</span><br><span class="line">	  		&#125;</span><br><span class="line">		<span class="keyword">default</span>:</span><br><span class="line">	        <span class="keyword">self</span>.player.pause()</span><br><span class="line">	    &#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>方法 <code>handleRouteChange(notification:)</code> 中的第二行报错<br><a id="more"></a></p>
+<h1 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h1><p><code>userInfo[AVAudioSessionRouteChangeReasonKey]</code>返回的是<code>NSNumber</code>，而不是<code>AVAudioSession.RouteChangeReason</code>。类型转换错误必然导致不会运行<code>if</code>中的语句。</p>
+<h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h1><p>既然拿到的是<code>NSNumber</code>类型，下面有两种方案：</p>
+<ul>
+<li>为了减少不必要的类型转换，直接由<code>NSNumber</code>得到<code>UInt</code>（采用注释的方法使代码逻辑更清晰）</li>
+<li>为了代码语义清楚，先由<code>NSNumber</code>得到<code>UInt</code>，再构造<code>AVAudioSession.RouteChangeReason</code></li>
+</ul>
+<p>最后使用<code>switch/if</code>语句写后续的判断与逻辑。</p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/iOS/">iOS</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/iOS/">iOS</a><a href="/tags/Swift/">Swift</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    <br>
+    
+    &copy; 2019 iDev_01
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

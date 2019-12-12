@@ -1,0 +1,149 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>【解决方案】Android开发填坑之RecyclerView刷新闪烁 | iDev_01 | 一次选择产生的蝴蝶效应，足够影响一生。</title>
+
+  
+  <meta name="author" content="iDev_01">
+  
+
+  
+  <meta name="description" content="一个iOS开发者的小站">
+  
+
+  
+  <meta name="keywords" content="iDev_01, iOS, 马浩">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="【解决方案】Android开发填坑之RecyclerView刷新闪烁">
+
+  <meta property="og:site_name" content="iDev_01">
+
+  
+  <meta property="og:image" content="/favicon.ico">
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="iDev_01" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">iDev_01</a>
+    </h1>
+    <p class="site-description">一次选择产生的蝴蝶效应，足够影响一生。</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/archives">Archives</a></li>
+      
+        <li><a href="/about">About</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>【解决方案】Android开发填坑之RecyclerView刷新闪烁</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2018/06/29/【解决方案】Android开发填坑之RecyclerView刷新闪烁/" rel="bookmark">
+        <time class="entry-date published" datetime="2018-06-29T08:58:16.000Z">
+          2018-06-29
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h1 id="现象"><a href="#现象" class="headerlink" title="现象"></a>现象</h1><p>RecyclerView数据刷新闪烁。<br><a id="more"></a></p>
+<h1 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h1><p>RecyclerView有一个RecyclerViewPool用来缓存已创建的item，不手动创建RecyclerViewPool时，系统会自动创建一个大小为5的RecyclerViewPool。<br>这就意味着RecyclerView的item个数大于5，每次刷新都会自动调用onCreateViewHolder()。<br>新创建的item不配置相关内容的话，将显示布局文件中的默认值。从而导致有数据和无数据的闪烁。</p>
+<h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h1><p>手动创建给RecyclerViewPool对象，指定它的大小，再传给RecyclerView对象。<br><code>RecyclerView.RecycledViewPool pool= new RecyclerView.RecycledViewPool();
+pool.setMaxRecycledViews(0, 10);
+recyclerView.setRecycledViewPool(pool);</code></p>
+<h5 id="ps"><a href="#ps" class="headerlink" title="ps:"></a>ps:</h5><p>原因其实有多种，所以解决方案不一定对症。你可以尝试此方案，判断闪烁是否由这个原因引起。</p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/Android/">Android</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/Android/">Android</a><a href="/tags/RecyclerView/">RecyclerView</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    <br>
+    
+    &copy; 2019 iDev_01
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

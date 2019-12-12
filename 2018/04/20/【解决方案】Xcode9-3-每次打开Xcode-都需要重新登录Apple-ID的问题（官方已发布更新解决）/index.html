@@ -1,0 +1,147 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>【解决方案】Xcode9.3 每次打开Xcode 都需要重新登录Apple ID的问题（官方已发布更新解决） | iDev_01 | 一次选择产生的蝴蝶效应，足够影响一生。</title>
+
+  
+  <meta name="author" content="iDev_01">
+  
+
+  
+  <meta name="description" content="一个iOS开发者的小站">
+  
+
+  
+  <meta name="keywords" content="iDev_01, iOS, 马浩">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="【解决方案】Xcode9.3 每次打开Xcode 都需要重新登录Apple ID的问题（官方已发布更新解决）">
+
+  <meta property="og:site_name" content="iDev_01">
+
+  
+  <meta property="og:image" content="/favicon.ico">
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="iDev_01" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">iDev_01</a>
+    </h1>
+    <p class="site-description">一次选择产生的蝴蝶效应，足够影响一生。</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/archives">Archives</a></li>
+      
+        <li><a href="/about">About</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>【解决方案】Xcode9.3 每次打开Xcode 都需要重新登录Apple ID的问题（官方已发布更新解决）</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2018/04/20/【解决方案】Xcode9-3-每次打开Xcode-都需要重新登录Apple-ID的问题（官方已发布更新解决）/" rel="bookmark">
+        <time class="entry-date published" datetime="2018-04-20T08:46:46.000Z">
+          2018-04-20
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h1 id="现象"><a href="#现象" class="headerlink" title="现象"></a>现象</h1><pre><code>每次打开Xcode9.3，在Preference中Apple ID提示“Your session has expired. Please log in.”
+</code></pre><a id="more"></a>
+<h1 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h1><pre><code>Xcode9.3没有去更新钥匙串中的“Xcode-Token”和“Xcode-AlternateDSID”
+</code></pre><h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h1><pre><code>下载一个低版本的Xcode(我下载的是9.2)去登录，生成这两个key，删掉低版本的Xcode，结束。
+</code></pre>
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/iOS/">iOS</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/iOS/">iOS</a><a href="/tags/Xcode/">Xcode</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    <br>
+    
+    &copy; 2019 iDev_01
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>
