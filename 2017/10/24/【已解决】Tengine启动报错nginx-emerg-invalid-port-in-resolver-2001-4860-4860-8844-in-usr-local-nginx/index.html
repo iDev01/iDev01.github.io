@@ -3,7 +3,7 @@
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="utf-8">
   
-  <title>iOS二维码限制扫描区域的问题记录 | iDev_01 | iDev01</title>
+  <title>【已解决】Tengine启动报错nginx: [emerg] invalid port in resolver &#34;2001:4860:4860::8844&#34; in /usr/local/nginx | iDev_01 | iDev01</title>
 
   
   <meta name="author" content="iDev_01">
@@ -21,7 +21,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
-  <meta property="og:title" content="iOS二维码限制扫描区域的问题记录">
+  <meta property="og:title" content="【已解决】Tengine启动报错nginx: [emerg] invalid port in resolver &#34;2001:4860:4860::8844&#34; in /usr/local/nginx">
 
   <meta property="og:site_name" content="iDev_01">
 
@@ -64,15 +64,15 @@
 
   
     
-    <h3 class="article-title"><span>iOS二维码限制扫描区域的问题记录</span></h3>
+    <h3 class="article-title"><span>【已解决】Tengine启动报错nginx: [emerg] invalid port in resolver &#34;2001:4860:4860::8844&#34; in /usr/local/nginx</span></h3>
     
   
 
   <div class="article-top-meta">
     <span class="posted-on">
-      <a href="/2016/11/24/iOS二维码限制扫描区域的问题记录/" rel="bookmark">
-        <time class="entry-date published" datetime="2016-11-24T05:57:17.000Z">
-          2016-11-24
+      <a href="/2017/10/24/【已解决】Tengine启动报错nginx-emerg-invalid-port-in-resolver-2001-4860-4860-8844-in-usr-local-nginx/" rel="bookmark">
+        <time class="entry-date published" datetime="2017-10-24T13:37:46.000Z">
+          2017-10-24
         </time>
       </a>
     </span>
@@ -84,11 +84,7 @@
   <div class="article-content">
     <div class="entry">
       
-        <p>AVCaptureMetadataOutput有一个属性rectOfIntrest，利用这个属性就可以设置扫描区域了<br>不过，这个感觉略坑，x和y是相反的，width和height也是相反的</p>
-<p>swift版本：</p>
-<p><code>CGRect.init(x:扫描区域y/屏幕height, y: 扫描区域x/屏幕width, width: 扫描区域height/屏幕height, height: 扫描区域width/屏幕width)</code></p>
-<p>Objective-C版本：</p>
-<p><code>CGRectMake(扫描区域y/屏幕height, 扫描区域x/屏幕width, 扫描区域height/屏幕height, 扫描区域width/屏幕width)</code></p>
+        <p>启动Tengine服务的时候报错：<br><code>nginx: [emerg] invalid port in resolver &quot;2001:4860:4860::8844&quot; in /usr/local/nginx-generic-1.6.0/conf/nginx.conf</code><br>原因：ipv6导致<br>解决方法：在安装的时候就要加上参数<br><code>./configure --with-ipv6</code><br>然后<br><code>make &amp;&amp; make install</code></p>
 
       
     </div>
@@ -103,7 +99,7 @@
 
     <span class="post-categories">
       <i class="icon-categories"></i>
-        <a href="/categories/iOS/">iOS</a>
+        <a href="/categories/后端/">后端</a>
     </span>
     
 
@@ -112,7 +108,7 @@
 
     <span class="post-tags">
       <i class="icon-tags"></i>
-        <a href="/tags/iOS/">iOS</a><a href="/tags/二维码/">二维码</a>
+        <a href="/tags/Tengine/">Tengine</a><a href="/tags/nginx/">nginx</a>
     </span>
     
 

@@ -3,7 +3,7 @@
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="utf-8">
   
-  <title>iDev01 | iDev_01 | iDev01</title>
+  <title>iOS关于UIStoryboard中TabBar图标文字的选中颜色问题 | iDev_01 | iDev01</title>
 
   
   <meta name="author" content="iDev_01">
@@ -21,7 +21,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
-  <meta property="og:title" content="iDev01">
+  <meta property="og:title" content="iOS关于UIStoryboard中TabBar图标文字的选中颜色问题">
 
   <meta property="og:site_name" content="iDev_01">
 
@@ -49,6 +49,12 @@
   <nav class="site-navigation">
     <ul>
       
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/archives">Archives</a></li>
+      
+        <li><a href="/about">About</a></li>
+      
     </ul>
   </nav>
 </header>
@@ -58,15 +64,15 @@
 
   
     
-    <h3 class="article-title"><span>iDev01</span></h3>
+    <h3 class="article-title"><span>iOS关于UIStoryboard中TabBar图标文字的选中颜色问题</span></h3>
     
   
 
   <div class="article-top-meta">
     <span class="posted-on">
-      <a href="/about/me.html" rel="bookmark">
-        <time class="entry-date published" datetime="2019-12-11T13:32:28.000Z">
-          2019-12-11
+      <a href="/2018/01/12/iOS关于UIStoryboard中TabBar图标文字的选中颜色问题/" rel="bookmark">
+        <time class="entry-date published" datetime="2018-01-12T02:28:00.000Z">
+          2018-01-12
         </time>
       </a>
     </span>
@@ -78,7 +84,28 @@
   <div class="article-content">
     <div class="entry">
       
-        
+        <p>之前我们都是用代码来实现，那么多代码，看起来一点都不简洁，今天终于找到了一个好方法。</p>
+<ul>
+<li>图标</li>
+</ul>
+<p>前提：图标要在Assets.xcassets中。</p>
+<ol>
+<li>在Assets.xcassets中选中要设置的图标</li>
+<li>打开右侧的属性编辑面板</li>
+<li>看一看第二项Render as</li>
+<li>设置为Original Image</li>
+</ol>
+<ul>
+<li>文字</li>
+</ul>
+<ol>
+<li>在Storyboard文件中选中TabBar</li>
+<li>打开右侧的属性编辑面板</li>
+<li>选中第二个标签页（show the identity inspector）</li>
+<li>在Use Defined Runtime Attributes中添加一项</li>
+<li>KeyPath为tintColor，Type为Color，Value自己选颜色</li>
+</ol>
+
       
     </div>
 
@@ -88,7 +115,21 @@
     <div class="article-meta pull-left">
 
     
+      
 
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/iOS/">iOS</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/iOS/">iOS</a><a href="/tags/UIStoryboard/">UIStoryboard</a><a href="/tags/TabBar/">TabBar</a><a href="/tags/颜色/">颜色</a>
+    </span>
     
 
     </div>
