@@ -104,6 +104,61 @@
 
   
     
+    <h3 class="article-title"><a href="/2016/11/24/iOS二维码限制扫描区域的问题记录/"><span>iOS二维码限制扫描区域的问题记录</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2016/11/24/iOS二维码限制扫描区域的问题记录/" rel="bookmark">
+        <time class="entry-date published" datetime="2016-11-24T05:57:17.000Z">
+          2016-11-24
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>​    AVCaptureMetadataOutput有一个属性rectOfIntrest，利用这个属性就可以设置扫描区域了<br>​    不过，这个感觉略坑，x和y是相反的，width和height也是相反的<br>​    swift版本：</p>
+<p>​    <code>CGRect.init(x:扫描区域y/屏幕height, y: 扫描区域x/屏幕width, width: 扫描区域height/屏幕height, height: 扫描区域width/屏幕width)</code><br>Objective-C版本：</p>
+<p>​    <code>CGRectMake(扫描区域y/屏幕height, 扫描区域x/屏幕width, 扫描区域height/屏幕height, 扫描区域width/屏幕width)</code></p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/iOS-二维码/">iOS,二维码</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article>
+
+  
+    
     <h3 class="article-title"><a href="/2016/11/21/python中的验证码识别库PyTesser的安装教程/"><span>python中的验证码识别库PyTesser的安装教程</span></a></h3>
     
   
