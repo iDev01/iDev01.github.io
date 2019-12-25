@@ -137,11 +137,12 @@
 <main class="app-body flex-box">
   <!-- Article START -->
   <article class="post-article">
-    <section class="markdown-content"><h1 id="现象"><a href="#现象" class="headerlink" title="现象"></a>现象</h1><p>我们判断耳机拔出需要订阅一个 <code>AVAudioSession.routeChangeNotification</code>通知<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">NotificationCenter</span>.<span class="keyword">default</span>.addObserver(<span class="keyword">self</span>, selector: #selector(<span class="type">Test</span>.handleRouteChange(notification:)), name: <span class="type">AVAudioSession</span>.routeChangeNotification, object: <span class="type">AVAudioSession</span>.sharedInstance())</span><br></pre></td></tr></table></figure></p>
+    <section class="markdown-content"><h2 id="现象"><a href="#现象" class="headerlink" title="现象"></a>现象</h2><p>我们判断耳机拔出需要订阅一个 <code>AVAudioSession.routeChangeNotification</code>通知<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">NotificationCenter</span>.<span class="keyword">default</span>.addObserver(<span class="keyword">self</span>, selector: #selector(<span class="type">Test</span>.handleRouteChange(notification:)), name: <span class="type">AVAudioSession</span>.routeChangeNotification, object: <span class="type">AVAudioSession</span>.sharedInstance())</span><br></pre></td></tr></table></figure></p>
+<a id="more"></a>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@objc</span> <span class="function"><span class="keyword">func</span> <span class="title">handleRouteChange</span><span class="params">(notification: Notification)</span></span> -&gt; <span class="type">Void</span> &#123;</span><br><span class="line">	<span class="keyword">if</span> <span class="keyword">let</span> userInfo = notification.userInfo,</span><br><span class="line">	   <span class="keyword">let</span> changeResonNumber = userInfo[<span class="type">AVAudioSessionRouteChangeReasonKey</span>] <span class="keyword">as</span>? <span class="type">AVAudioSession</span>.<span class="type">RouteChangeReason</span> ,</span><br><span class="line">	   <span class="keyword">let</span> changeResonDescription = userInfo[<span class="type">AVAudioSessionRouteChangePreviousRouteKey</span>] <span class="keyword">as</span>? [<span class="type">AVAudioSessionPortDescription</span>] &#123;</span><br><span class="line">	    <span class="built_in">print</span>(changeReson)</span><br><span class="line">	    <span class="keyword">switch</span> changeReson &#123;</span><br><span class="line">	    <span class="keyword">case</span> .oldDeviceUnavailable:</span><br><span class="line">		    <span class="keyword">if</span> changeResonDescription[<span class="number">1</span>].portType == <span class="type">AVAudioSession</span>.<span class="type">Port</span>.headphones &#123;</span><br><span class="line">				<span class="keyword">self</span>.player.pause()</span><br><span class="line">	    	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		  		<span class="keyword">self</span>.player.resume()</span><br><span class="line">	  		&#125;</span><br><span class="line">		<span class="keyword">default</span>:</span><br><span class="line">	        <span class="keyword">self</span>.player.pause()</span><br><span class="line">	    &#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>方法 <code>handleRouteChange(notification:)</code> 中的第二行报错<br><a id="more"></a></p>
-<h1 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h1><p><code>userInfo[AVAudioSessionRouteChangeReasonKey]</code>返回的是<code>NSNumber</code>，而不是<code>AVAudioSession.RouteChangeReason</code>。类型转换错误必然导致不会运行<code>if</code>中的语句。</p>
-<h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h1><p>既然拿到的是<code>NSNumber</code>类型，下面有两种方案：</p>
+<p>方法 <code>handleRouteChange(notification:)</code> 中的第二行报错</p>
+<h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p><code>userInfo[AVAudioSessionRouteChangeReasonKey]</code>返回的是<code>NSNumber</code>，而不是<code>AVAudioSession.RouteChangeReason</code>。类型转换错误必然导致不会运行<code>if</code>中的语句。</p>
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>既然拿到的是<code>NSNumber</code>类型，下面有两种方案：</p>
 <ul>
 <li>为了减少不必要的类型转换，直接由<code>NSNumber</code>得到<code>UInt</code>（采用注释的方法使代码逻辑更清晰）</li>
 <li>为了代码语义清楚，先由<code>NSNumber</code>得到<code>UInt</code>，再构造<code>AVAudioSession.RouteChangeReason</code></li>
@@ -219,7 +220,7 @@
   <div class="toc-main">
     <strong class="toc-title">Catalog</strong>
     
-      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#现象"><span class="toc-nav-text">现象</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#原因"><span class="toc-nav-text">原因</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#解决方案"><span class="toc-nav-text">解决方案</span></a></li></ol>
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#现象"><span class="toc-nav-text">现象</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#原因"><span class="toc-nav-text">原因</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#解决方案"><span class="toc-nav-text">解决方案</span></a></li></ol>
     
   </div>
 </aside>
@@ -295,9 +296,7 @@
 </div>
     <footer class="app-footer">
   <p class="copyright">
-    &copy; 2019 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
-    <br>
-    Theme by <a href="https://github.com/yanm1ng">yanm1ng</a>
+    &copy; 2019 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> | Theme by <a href="https://github.com/yanm1ng">yanm1ng</a>
   </p>
 </footer>
 

@@ -59,7 +59,7 @@ pre {
   padding: 2em 1em;
   margin: 0 auto;
   height: 100%;
-  max-width: 980px;
+  max-width: 1000px;
   position: relative;
   opacity: 0;
   transform: translateY(-20px);
@@ -93,7 +93,7 @@ pre {
   margin-top: 60px;
 }
 h2.article-head {
-  font-size: 1.6em;
+  font-size: 1.8em;
   margin-bottom: 0;
 }
 .article-head > a {
