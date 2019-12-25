@@ -1,592 +1,410 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
-<head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="utf-8">
-  
-  <title>iDev_01 | 一次选择产生的蝴蝶效应，足够影响一生。</title>
-
-  
-  <meta name="author" content="iDev_01">
-  
-
-  
+  <head><meta name="generator" content="Hexo 3.9.0">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
   <meta name="description" content="一个iOS开发者的小站">
+  <meta name="keyword" content="iOS">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      iDev_01
+    
+  </title>
+  <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  
+    <script src="/js/qrious.js"></script>
+  
+  
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
   
 
-  
-  <meta name="keywords" content="iDev_01, iOS, 马浩">
-  
 
-  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-
-  
-
-  <meta property="og:site_name" content="iDev_01">
-
-  
-  <meta property="og:image" content="/favicon.ico">
-  
-
-  <link href="/favicon.ico" rel="icon">
-  <link rel="alternate" href="/atom.xml" title="iDev_01" type="application/atom+xml">
-  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
 </head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png">
+</div>
 
-
-<body>
-<div class="blog">
-  <div class="content">
-
-    <header>
-  <div class="site-branding">
-    <h1 class="site-title">
-      <a href="/">iDev_01</a>
-    </h1>
-    <p class="site-description">一次选择产生的蝴蝶效应，足够影响一生。</p>
-  </div>
-  <nav class="site-navigation">
-    <ul>
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>iDev_01</span>
+    </a>
+    <ul class="right-list">
       
-        <li><a href="/">Home</a></li>
+        <li class="list-item">
+          
+            <a href="/" class="item-link active">Home</a>
+          
+        </li>
       
-        <li><a href="/archives">Archives</a></li>
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
       
-        <li><a href="/about">About</a></li>
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
       
     </ul>
-  </nav>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link mobile-active">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
 </header>
 
-    <main class="site-main posts-loop">
-    
-  <article>
-
+    <main class="app-body">
   
-    
-    <h3 class="article-title"><a href="/2019/01/07/Swift-耳机插拔控制类型转换错误/"><span>Swift 耳机插拔控制类型转换错误</span></a></h3>
-    
-  
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2019/01/07/Swift-耳机插拔控制类型转换错误/" rel="bookmark">
-        <time class="entry-date published" datetime="2019-01-07T06:41:55.000Z">
-          2019-01-07
-        </time>
-      </a>
-    </span>
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/01/07/Swift-耳机插拔控制类型转换错误/">Swift 耳机插拔控制类型转换错误</a>
+      </h2>
+      <p class="article-date">2019年1月7日</p>
       
-        <h1 id="现象"><a href="#现象" class="headerlink" title="现象"></a>现象</h1><p>我们判断耳机拔出需要订阅一个 <code>AVAudioSession.routeChangeNotification</code>通知<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">NotificationCenter</span>.<span class="keyword">default</span>.addObserver(<span class="keyword">self</span>, selector: #selector(<span class="type">Test</span>.handleRouteChange(notification:)), name: <span class="type">AVAudioSession</span>.routeChangeNotification, object: <span class="type">AVAudioSession</span>.sharedInstance())</span><br></pre></td></tr></table></figure></p>
+        
+  <a href="/tags#iOS" >
+    <span class="tag-code">iOS</span>
+  </a>
+
+  <a href="/tags#Swift" >
+    <span class="tag-code">Swift</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          <h1 id="现象"><a href="#现象" class="headerlink" title="现象"></a>现象</h1><p>我们判断耳机拔出需要订阅一个 <code>AVAudioSession.routeChangeNotification</code>通知<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">NotificationCenter</span>.<span class="keyword">default</span>.addObserver(<span class="keyword">self</span>, selector: #selector(<span class="type">Test</span>.handleRouteChange(notification:)), name: <span class="type">AVAudioSession</span>.routeChangeNotification, object: <span class="type">AVAudioSession</span>.sharedInstance())</span><br></pre></td></tr></table></figure></p>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@objc</span> <span class="function"><span class="keyword">func</span> <span class="title">handleRouteChange</span><span class="params">(notification: Notification)</span></span> -&gt; <span class="type">Void</span> &#123;</span><br><span class="line">	<span class="keyword">if</span> <span class="keyword">let</span> userInfo = notification.userInfo,</span><br><span class="line">	   <span class="keyword">let</span> changeResonNumber = userInfo[<span class="type">AVAudioSessionRouteChangeReasonKey</span>] <span class="keyword">as</span>? <span class="type">AVAudioSession</span>.<span class="type">RouteChangeReason</span> ,</span><br><span class="line">	   <span class="keyword">let</span> changeResonDescription = userInfo[<span class="type">AVAudioSessionRouteChangePreviousRouteKey</span>] <span class="keyword">as</span>? [<span class="type">AVAudioSessionPortDescription</span>] &#123;</span><br><span class="line">	    <span class="built_in">print</span>(changeReson)</span><br><span class="line">	    <span class="keyword">switch</span> changeReson &#123;</span><br><span class="line">	    <span class="keyword">case</span> .oldDeviceUnavailable:</span><br><span class="line">		    <span class="keyword">if</span> changeResonDescription[<span class="number">1</span>].portType == <span class="type">AVAudioSession</span>.<span class="type">Port</span>.headphones &#123;</span><br><span class="line">				<span class="keyword">self</span>.player.pause()</span><br><span class="line">	    	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		  		<span class="keyword">self</span>.player.resume()</span><br><span class="line">	  		&#125;</span><br><span class="line">		<span class="keyword">default</span>:</span><br><span class="line">	        <span class="keyword">self</span>.player.pause()</span><br><span class="line">	    &#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>方法 <code>handleRouteChange(notification:)</code> 中的第二行报错<br>
         
-      
-    </p></div>
-
-  </div>
-
-  <div class="article-footer">
-    <div class="article-meta pull-left">
-
-    
-      
-
-    <span class="post-categories">
-      <i class="icon-categories"></i>
-        <a href="/categories/iOS/">iOS</a>
-    </span>
-    
-
-    
-    
-
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/tags/iOS/">iOS</a><a href="/tags/Swift/">Swift</a>
-    </span>
-    
-
-    </div>
-
-    
-  </div>
-</article>
-
-
-
-  <article>
-
+      </div>
+      <a class="more" href="/2019/01/07/Swift-耳机插拔控制类型转换错误/">Read more</a>
+    </article>
   
-    
-    <h3 class="article-title"><a href="/2018/07/27/【开源】ZYDatePickerController——类UIAlertController的日期选择器/"><span>【开源】ZYDatePickerController——类UIAlertController的日期选择器</span></a></h3>
-    
-  
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2018/07/27/【开源】ZYDatePickerController——类UIAlertController的日期选择器/" rel="bookmark">
-        <time class="entry-date published" datetime="2018-07-26T16:25:33.000Z">
-          2018-07-27
-        </time>
-      </a>
-    </span>
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2018/07/27/【开源】ZYDatePickerController——类UIAlertController的日期选择器/">【开源】ZYDatePickerController——类UIAlertController的日期选择器</a>
+      </h2>
+      <p class="article-date">2018年7月27日</p>
       
-        <h1 id="传送门"><a href="#传送门" class="headerlink" title="传送门"></a>传送门</h1><p><a href="https://github.com/NSLogxiaoyu3/ZYDatePickerController" target="_blank" rel="noopener">https://github.com/NSLogxiaoyu3/ZYDatePickerController</a></p>
         
+  <a href="/tags#iOS" >
+    <span class="tag-code">iOS</span>
+  </a>
+
+  <a href="/tags#DatePicker" >
+    <span class="tag-code">DatePicker</span>
+  </a>
+
       
-    </div>
-
-  </div>
-
-  <div class="article-footer">
-    <div class="article-meta pull-left">
-
-    
-      
-
-    <span class="post-categories">
-      <i class="icon-categories"></i>
-        <a href="/categories/iOS/">iOS</a>
-    </span>
-    
-
-    
-    
-
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/tags/iOS/">iOS</a><a href="/tags/DatePicker/">DatePicker</a>
-    </span>
-    
-
-    </div>
-
-    
-  </div>
-</article>
-
-
-
-  <article>
-
-  
-    
-    <h3 class="article-title"><a href="/2018/06/29/【解决方案】Android开发填坑之RecyclerView刷新闪烁/"><span>【解决方案】Android开发填坑之RecyclerView刷新闪烁</span></a></h3>
-    
-  
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2018/06/29/【解决方案】Android开发填坑之RecyclerView刷新闪烁/" rel="bookmark">
-        <time class="entry-date published" datetime="2018-06-29T08:58:16.000Z">
-          2018-06-29
-        </time>
-      </a>
-    </span>
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
-      
-        <h1 id="现象"><a href="#现象" class="headerlink" title="现象"></a>现象</h1><p>RecyclerView数据刷新闪烁。<br>
+      <div class="article-summary">
         
-      
-    </p></div>
-
-  </div>
-
-  <div class="article-footer">
-    <div class="article-meta pull-left">
-
-    
-      
-
-    <span class="post-categories">
-      <i class="icon-categories"></i>
-        <a href="/categories/Android/">Android</a>
-    </span>
-    
-
-    
-    
-
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/tags/Android/">Android</a><a href="/tags/RecyclerView/">RecyclerView</a>
-    </span>
-    
-
-    </div>
-
-    
-  </div>
-</article>
-
-
-
-  <article>
-
+          <h1 id="传送门"><a href="#传送门" class="headerlink" title="传送门"></a>传送门</h1><p><a href="https://github.com/NSLogxiaoyu3/ZYDatePickerController" target="_blank" rel="noopener">https://github.com/NSLogxiaoyu3/ZYDatePickerController</a></p>
+        
+      </div>
+      <a class="more" href="/2018/07/27/【开源】ZYDatePickerController——类UIAlertController的日期选择器/">Read more</a>
+    </article>
   
-    
-    <h3 class="article-title"><a href="/2018/04/20/【解决方案】Xcode9-3-每次打开Xcode-都需要重新登录Apple-ID的问题（官方已发布更新解决）/"><span>【解决方案】Xcode9.3 每次打开Xcode 都需要重新登录Apple ID的问题（官方已发布更新解决）</span></a></h3>
-    
-  
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2018/04/20/【解决方案】Xcode9-3-每次打开Xcode-都需要重新登录Apple-ID的问题（官方已发布更新解决）/" rel="bookmark">
-        <time class="entry-date published" datetime="2018-04-20T08:46:46.000Z">
-          2018-04-20
-        </time>
-      </a>
-    </span>
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2018/06/29/【解决方案】Android开发填坑之RecyclerView刷新闪烁/">【解决方案】Android开发填坑之RecyclerView刷新闪烁</a>
+      </h2>
+      <p class="article-date">2018年6月29日</p>
       
-        <h1 id="现象"><a href="#现象" class="headerlink" title="现象"></a>现象</h1><pre><code>每次打开Xcode9.3，在Preference中Apple ID提示“Your session has expired. Please log in.”
+        
+  <a href="/tags#Android" >
+    <span class="tag-code">Android</span>
+  </a>
+
+  <a href="/tags#RecyclerView" >
+    <span class="tag-code">RecyclerView</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          <h1 id="现象"><a href="#现象" class="headerlink" title="现象"></a>现象</h1><p>RecyclerView数据刷新闪烁。<br>
+        
+      </div>
+      <a class="more" href="/2018/06/29/【解决方案】Android开发填坑之RecyclerView刷新闪烁/">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2018/04/20/【解决方案】Xcode9-3-每次打开Xcode-都需要重新登录Apple-ID的问题（官方已发布更新解决）/">【解决方案】Xcode9.3 每次打开Xcode 都需要重新登录Apple ID的问题（官方已发布更新解决）</a>
+      </h2>
+      <p class="article-date">2018年4月20日</p>
+      
+        
+  <a href="/tags#iOS" >
+    <span class="tag-code">iOS</span>
+  </a>
+
+  <a href="/tags#Xcode" >
+    <span class="tag-code">Xcode</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          <h1 id="现象"><a href="#现象" class="headerlink" title="现象"></a>现象</h1><pre><code>每次打开Xcode9.3，在Preference中Apple ID提示“Your session has expired. Please log in.”
 </code></pre>
         
-      
-    </div>
-
-  </div>
-
-  <div class="article-footer">
-    <div class="article-meta pull-left">
-
-    
-      
-
-    <span class="post-categories">
-      <i class="icon-categories"></i>
-        <a href="/categories/iOS/">iOS</a>
-    </span>
-    
-
-    
-    
-
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/tags/iOS/">iOS</a><a href="/tags/Xcode/">Xcode</a>
-    </span>
-    
-
-    </div>
-
-    
-  </div>
-</article>
-
-
-
-  <article>
-
+      </div>
+      <a class="more" href="/2018/04/20/【解决方案】Xcode9-3-每次打开Xcode-都需要重新登录Apple-ID的问题（官方已发布更新解决）/">Read more</a>
+    </article>
   
-    
-    <h3 class="article-title"><a href="/2018/01/12/iOS关于UIStoryboard中TabBar图标文字的选中颜色问题/"><span>iOS关于UIStoryboard中TabBar图标文字的选中颜色问题</span></a></h3>
-    
-  
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2018/01/12/iOS关于UIStoryboard中TabBar图标文字的选中颜色问题/" rel="bookmark">
-        <time class="entry-date published" datetime="2018-01-12T02:28:00.000Z">
-          2018-01-12
-        </time>
-      </a>
-    </span>
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2018/01/12/iOS关于UIStoryboard中TabBar图标文字的选中颜色问题/">iOS关于UIStoryboard中TabBar图标文字的选中颜色问题</a>
+      </h2>
+      <p class="article-date">2018年1月12日</p>
       
-        <p>之前我们都是用代码来实现，那么多代码，看起来一点都不简洁，今天终于找到了一个好方法。</p>
-<ul>
-<li>图标</li>
-</ul>
-<p>前提：图标要在Assets.xcassets中。</p>
-<ol>
-<li>在Assets.xcassets中选中要设置的图标</li>
-<li>打开右侧的属性编辑面板</li>
-<li>看一看第二项Render as</li>
-<li>设置为Original Image</li>
-</ol>
-<ul>
-<li>文字</li>
-</ul>
-<ol>
-<li>在Storyboard文件中选中TabBar</li>
-<li>打开右侧的属性编辑面板</li>
-<li>选中第二个标签页（show the identity inspector）</li>
-<li>在Use Defined Runtime Attributes中添加一项</li>
-<li>KeyPath为tintColor，Type为Color，Value自己选颜色</li>
-</ol>
-
-      
-    </div>
-
-  </div>
-
-  <div class="article-footer">
-    <div class="article-meta pull-left">
-
-    
-      
-
-    <span class="post-categories">
-      <i class="icon-categories"></i>
-        <a href="/categories/iOS/">iOS</a>
-    </span>
-    
-
-    
-    
-
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/tags/iOS/">iOS</a><a href="/tags/UIStoryboard/">UIStoryboard</a><a href="/tags/TabBar/">TabBar</a><a href="/tags/颜色/">颜色</a>
-    </span>
-    
-
-    </div>
-
-    
-  </div>
-</article>
-
-
-
-  <article>
-
-  
-    
-    <h3 class="article-title"><a href="/2017/10/24/【已解决】Tengine启动报错nginx-emerg-invalid-port-in-resolver-2001-4860-4860-8844-in-usr-local-nginx/"><span>【已解决】Tengine启动报错nginx: [emerg] invalid port in resolver &#34;2001:4860:4860::8844&#34; in /usr/local/nginx</span></a></h3>
-    
-  
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2017/10/24/【已解决】Tengine启动报错nginx-emerg-invalid-port-in-resolver-2001-4860-4860-8844-in-usr-local-nginx/" rel="bookmark">
-        <time class="entry-date published" datetime="2017-10-24T13:37:46.000Z">
-          2017-10-24
-        </time>
-      </a>
-    </span>
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
-      
-        <h1 id="现象"><a href="#现象" class="headerlink" title="现象"></a>现象</h1><p>启动Tengine服务的时候报错：<br><code>nginx: [emerg] invalid port in resolver &quot;2001:4860:4860::8844&quot; in /usr/local/nginx-generic-1.6.0/conf/nginx.conf</code><br>
         
-      
-    </p></div>
+  <a href="/tags#iOS" >
+    <span class="tag-code">iOS</span>
+  </a>
 
-  </div>
+  <a href="/tags#UIStoryboard" >
+    <span class="tag-code">UIStoryboard</span>
+  </a>
 
-  <div class="article-footer">
-    <div class="article-meta pull-left">
+  <a href="/tags#TabBar" >
+    <span class="tag-code">TabBar</span>
+  </a>
 
-    
-      
-
-    <span class="post-categories">
-      <i class="icon-categories"></i>
-        <a href="/categories/后端/">后端</a>
-    </span>
-    
-
-    
-    
-
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/tags/Tengine/">Tengine</a><a href="/tags/nginx/">nginx</a>
-    </span>
-    
-
-    </div>
-
-    
-  </div>
-</article>
-
-
-
-  <article>
-
-  
-    
-    <h3 class="article-title"><a href="/2016/11/24/iOS二维码限制扫描区域的问题记录/"><span>iOS二维码限制扫描区域的问题记录</span></a></h3>
-    
-  
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2016/11/24/iOS二维码限制扫描区域的问题记录/" rel="bookmark">
-        <time class="entry-date published" datetime="2016-11-24T05:57:17.000Z">
-          2016-11-24
-        </time>
-      </a>
-    </span>
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
-      
-        <p>AVCaptureMetadataOutput有一个属性rectOfIntrest，利用这个属性就可以设置扫描区域了<br>不过，这个感觉略坑，x和y是相反的，width和height也是相反的</p>
-<p>swift版本：</p>
-<p><code>CGRect.init(x:扫描区域y/屏幕height, y: 扫描区域x/屏幕width, width: 扫描区域height/屏幕height, height: 扫描区域width/屏幕width)</code></p>
-<p>Objective-C版本：</p>
-<p><code>CGRectMake(扫描区域y/屏幕height, 扫描区域x/屏幕width, 扫描区域height/屏幕height, 扫描区域width/屏幕width)</code></p>
+  <a href="/tags#颜色" >
+    <span class="tag-code">颜色</span>
+  </a>
 
       
-    </div>
-
-  </div>
-
-  <div class="article-footer">
-    <div class="article-meta pull-left">
-
-    
-      
-
-    <span class="post-categories">
-      <i class="icon-categories"></i>
-        <a href="/categories/iOS/">iOS</a>
-    </span>
-    
-
-    
-    
-
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/tags/iOS/">iOS</a><a href="/tags/二维码/">二维码</a>
-    </span>
-    
-
-    </div>
-
-    
-  </div>
-</article>
-
-
-
-  <article>
-
-  
-    
-    <h3 class="article-title"><a href="/2016/11/21/python中的验证码识别库PyTesser的安装教程/"><span>python中的验证码识别库PyTesser的安装教程</span></a></h3>
-    
-  
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2016/11/21/python中的验证码识别库PyTesser的安装教程/" rel="bookmark">
-        <time class="entry-date published" datetime="2016-11-21T03:40:24.000Z">
-          2016-11-21
-        </time>
-      </a>
-    </span>
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
-      
-        <p>最近刚刚接触这个东西，windows上安装的教程，看有个教程里写着添加环境变量，但是具体怎么添加、修改，就比较混乱了。我把安装的过程记录一下。</p>
+      <div class="article-summary">
         
-      
-    </div>
+          之前我们都是用代码来实现，那么多代码，看起来一点都不简洁，今天终于找到了一个好方法。
 
-  </div>
+图标
 
-  <div class="article-footer">
-    <div class="article-meta pull-left">
+前提：图标要在Assets.xcassets中。
 
-    
-      
-
-    <span class="post-categories">
-      <i class="icon-categories"></i>
-        <a href="/categories/python/">python</a>
-    </span>
-    
-
-    
-    
-
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/tags/python/">python</a><a href="/tags/PIL/">PIL</a><a href="/tags/PyTesser/">PyTesser</a><a href="/tags/验证码识别/">验证码识别</a>
-    </span>
-    
-
-    </div>
-
-    
-  </div>
-</article>
-
-
-
-
-<nav class="pagination">
+在Assets.xcassets中选中要设置的图标
+打开右侧的属性编辑面板
+看一看第二项Render as
+设置为Original Image
+ ...
+        
+      </div>
+      <a class="more" href="/2018/01/12/iOS关于UIStoryboard中TabBar图标文字的选中颜色问题/">Read more</a>
+    </article>
   
-  
-</nav>
-    </main>
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2017/10/24/【已解决】Tengine启动报错nginx-emerg-invalid-port-in-resolver-2001-4860-4860-8844-in-usr-local-nginx/">【已解决】Tengine启动报错nginx: [emerg] invalid port in resolver "2001:4860:4860::8844" in /usr/local/nginx</a>
+      </h2>
+      <p class="article-date">2017年10月24日</p>
+      
+        
+  <a href="/tags#Tengine" >
+    <span class="tag-code">Tengine</span>
+  </a>
 
-    <footer class="site-footer">
-  <p class="site-info">
-    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
-    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+  <a href="/tags#nginx" >
+    <span class="tag-code">nginx</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          <h1 id="现象"><a href="#现象" class="headerlink" title="现象"></a>现象</h1><p>启动Tengine服务的时候报错：<br><code>nginx: [emerg] invalid port in resolver &quot;2001:4860:4860::8844&quot; in /usr/local/nginx-generic-1.6.0/conf/nginx.conf</code><br>
+        
+      </div>
+      <a class="more" href="/2017/10/24/【已解决】Tengine启动报错nginx-emerg-invalid-port-in-resolver-2001-4860-4860-8844-in-usr-local-nginx/">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2016/11/24/iOS二维码限制扫描区域的问题记录/">iOS二维码限制扫描区域的问题记录</a>
+      </h2>
+      <p class="article-date">2016年11月24日</p>
+      
+        
+  <a href="/tags#iOS" >
+    <span class="tag-code">iOS</span>
+  </a>
+
+  <a href="/tags#二维码" >
+    <span class="tag-code">二维码</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          AVCaptureMetadataOutput有一个属性rectOfIntrest，利用这个属性就可以设置扫描区域了不过，这个感觉略坑，x和y是相反的，width和height也是相反的
+swift版本：
+CGRect.init(x:扫描区域y/屏幕height, y: 扫描区域x/屏幕wi ...
+        
+      </div>
+      <a class="more" href="/2016/11/24/iOS二维码限制扫描区域的问题记录/">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2016/11/21/python中的验证码识别库PyTesser的安装教程/">python中的验证码识别库PyTesser的安装教程</a>
+      </h2>
+      <p class="article-date">2016年11月21日</p>
+      
+        
+  <a href="/tags#python" >
+    <span class="tag-code">python</span>
+  </a>
+
+  <a href="/tags#PIL" >
+    <span class="tag-code">PIL</span>
+  </a>
+
+  <a href="/tags#PyTesser" >
+    <span class="tag-code">PyTesser</span>
+  </a>
+
+  <a href="/tags#验证码识别" >
+    <span class="tag-code">验证码识别</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          <p>最近刚刚接触这个东西，windows上安装的教程，看有个教程里写着添加环境变量，但是具体怎么添加、修改，就比较混乱了。我把安装的过程记录一下。</p>
+        
+      </div>
+      <a class="more" href="/2016/11/21/python中的验证码识别库PyTesser的安装教程/">Read more</a>
+    </article>
+  
+
+  
+</main>
+
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2019 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
     <br>
-    
-    &copy; 2019 iDev_01
-    
+    Theme by <a href="https://github.com/yanm1ng">yanm1ng</a>
   </p>
 </footer>
-    
-  </div>
-</div>
-</body>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script src="/js/script.js"></script>
+  </body>
 </html>

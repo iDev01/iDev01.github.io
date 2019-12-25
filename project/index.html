@@ -10,7 +10,7 @@
   
   <title>
     
-      iDev_01
+      Project | iDev_01
     
   </title>
   <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -128,101 +128,54 @@
 </header>
 
     <div id="article-banner">
-  <h2>Archives</h2>
-  <p class="post-date">文章归档</p>
+  <h2>Projects</h2>
+  <p class="post-date">开源项目</p>
 </div>
-<main class="app-body" id="archives">
-  
-  
-  
-    <section class="time-section">
-  <h1 class="section-year">
-    2019
-  </h1>
-  <div class="section-list">
-    
-    
-      <div class="section-list-item">
-        <a href="/2019/01/07/Swift-耳机插拔控制类型转换错误/" class="archive-title">Swift 耳机插拔控制类型转换错误</a>
-        <p class="archive-date">01-07</p>
-      </div>
-    
-  </div>
-</section>
-  
-    <section class="time-section">
-  <h1 class="section-year">
-    2018
-  </h1>
-  <div class="section-list">
-    
-    
-      <div class="section-list-item">
-        <a href="/2018/07/27/【开源】ZYDatePickerController——类UIAlertController的日期选择器/" class="archive-title">【开源】ZYDatePickerController——类UIAlertController的日期选择器</a>
-        <p class="archive-date">07-27</p>
-      </div>
-    
-      <div class="section-list-item">
-        <a href="/2018/06/29/【解决方案】Android开发填坑之RecyclerView刷新闪烁/" class="archive-title">【解决方案】Android开发填坑之RecyclerView刷新闪烁</a>
-        <p class="archive-date">06-29</p>
-      </div>
-    
-      <div class="section-list-item">
-        <a href="/2018/04/20/【解决方案】Xcode9-3-每次打开Xcode-都需要重新登录Apple-ID的问题（官方已发布更新解决）/" class="archive-title">【解决方案】Xcode9.3 每次打开Xcode 都需要重新登录Apple ID的问题（官方已发布更新解决）</a>
-        <p class="archive-date">04-20</p>
-      </div>
-    
-      <div class="section-list-item">
-        <a href="/2018/01/12/iOS关于UIStoryboard中TabBar图标文字的选中颜色问题/" class="archive-title">iOS关于UIStoryboard中TabBar图标文字的选中颜色问题</a>
-        <p class="archive-date">01-12</p>
-      </div>
-    
-  </div>
-</section>
-  
-    <section class="time-section">
-  <h1 class="section-year">
-    2017
-  </h1>
-  <div class="section-list">
-    
-    
-      <div class="section-list-item">
-        <a href="/2017/10/24/【已解决】Tengine启动报错nginx-emerg-invalid-port-in-resolver-2001-4860-4860-8844-in-usr-local-nginx/" class="archive-title">【已解决】Tengine启动报错nginx: [emerg] invalid port in resolver &#34;2001:4860:4860::8844&#34; in /usr/local/nginx</a>
-        <p class="archive-date">10-24</p>
-      </div>
-    
-  </div>
-</section>
-  
-    <section class="time-section">
-  <h1 class="section-year">
-    2016
-  </h1>
-  <div class="section-list">
-    
-    
-      <div class="section-list-item">
-        <a href="/2016/11/24/iOS二维码限制扫描区域的问题记录/" class="archive-title">iOS二维码限制扫描区域的问题记录</a>
-        <p class="archive-date">11-24</p>
-      </div>
-    
-      <div class="section-list-item">
-        <a href="/2016/11/21/python中的验证码识别库PyTesser的安装教程/" class="archive-title">python中的验证码识别库PyTesser的安装教程</a>
-        <p class="archive-date">11-21</p>
-      </div>
-    
-  </div>
-</section>
-  
+<main class="app-body project-app">
+  <div class="card-container" id="all-project"></div>
 </main>
-
 <script>
-  (function () {
-    var url = 'http://idev01.github.io/archives/2016/11/index.html';
+  (function() {
+    var url = 'http://idev01.github.io/project/index.html';
     $('#article-banner').geopattern(url);
-    $('.header').removeClass('fixed-header');
-  })();
+    $('.header').removeClass('fixed-header')
+    $.ajax({
+      headers: {
+        Accept: 'application/vnd.github.v3.raw'
+      },
+      type: 'get',
+      url: 'https://api.github.com/users/iDev01/repos',
+      success: function (data) {
+        var repos = data.sort(function(a, b) {
+          return (b.stargazers_count - a.stargazers_count)
+        }).slice(0, 6)
+        var cardHtml = repos.map(function(item) {
+          var description = item.description || ""
+          if (description.replace(/[\u0391-\uFFE5]/g, "aa").length > 72) {
+            description = description.slice(0, 72) + '...'
+          }
+          return (
+            '<section class="project-card">' + 
+              '<a class="card-wrap" href="'+ item.html_url +'" target="_blank">' +
+                '<div class="card-header" data-name="'+ item.name +'"></div>' +
+                '<h3 class="card-title">' + item.name + '</h3>' +
+                '<p class="card-description">' + description + '</p>' +
+                '<div class="card-footer">' +
+                  '<span><i class="fa fa-star"></i>'+ item.stargazers_count +'</span>' +
+                  '<span><i class="fa fa-code-fork"></i>' + item.forks_count +'</span>' +
+                '</div>' +
+              '</a>' +
+            '</section>'
+          )
+        }).join('')
+        $('#all-project').html(cardHtml)
+        $('.card-header').each(function() {
+          var name = $(this).data('name');
+          $(this).geopattern(name);
+        })
+      }
+    });
+  })()
 </script>
     <div class="scroll-top">
   <span class="arrow-icon"></span>
