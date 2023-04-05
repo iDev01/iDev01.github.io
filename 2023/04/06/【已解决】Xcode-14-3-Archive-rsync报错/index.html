@@ -12,7 +12,7 @@
   
   <title>
     
-      iOS二维码限制扫描区域的问题记录 | iDev_01
+      【已解决】Xcode 14.3 Archive rsync报错 | iDev_01
     
   </title>
   <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -130,8 +130,8 @@
 </header>
 
     <div id="article-banner">
-  <h2>iOS二维码限制扫描区域的问题记录</h2>
-  <p class="post-date">2016-11-24</p>
+  <h2>【已解决】Xcode 14.3 Archive rsync报错</h2>
+  <p class="post-date">2023-04-06</p>
   <div class="arrow-down">
     <a href="javascript:;"></a>
   </div>
@@ -139,23 +139,37 @@
 <main class="app-body flex-box">
   <!-- Article START -->
   <article class="post-article">
-    <section class="markdown-content"><p>AVCaptureMetadataOutput有一个属性rectOfIntrest，利用这个属性就可以设置扫描区域了<br>不过，这个感觉略坑，x和y是相反的，width和height也是相反的</p>
-<p>swift版本：</p>
-<p><code>CGRect.init(x:扫描区域y/屏幕height, y: 扫描区域x/屏幕width, width: 扫描区域height/屏幕height, height: 扫描区域width/屏幕width)</code></p>
-<p>Objective-C版本：</p>
-<p><code>CGRectMake(扫描区域y/屏幕height, 扫描区域x/屏幕width, 扫描区域height/屏幕height, 扫描区域width/屏幕width)</code></p>
+    <section class="markdown-content"><h1 id="现象"><a href="#现象" class="headerlink" title="现象"></a>现象</h1><p>工程使用了 cocoaPods<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">Symlinked...</span><br><span class="line"></span><br><span class="line">rsync --delete -av --filter P .*.?????? --links --filter &quot;- CVS/&quot; --filter &quot;- .svn/&quot; --filter &quot;- .git/&quot; --filter &quot;- .hg/&quot; --filter &quot;- Headers&quot; --filter &quot;- PrivateHeaders&quot; --filter &quot;- Modules&quot; &quot;../../../IntermediateBuildFilesPath/UninstalledProducts/iphoneos/AFNetworking.framework&quot; &quot;/Users/xxx/Library/Developer/Xcode/DerivedData/xxx-cddgwouglwcrojfvjfgommqfmpbd/Build/Intermediates.noindex/ArchiveIntermediates/xxx/InstallationBuildProductsLocation/Applications/xxx.app/Frameworks&quot;</span><br><span class="line"></span><br><span class="line">building file list ... rsync: link_stat &quot;/Users/xxx/Documents/xxx/xxx/../../../IntermediateBuildFilesPath/UninstalledProducts/iphoneos/AFNetworking.framework&quot; failed: No such file or directory (2)</span><br><span class="line"></span><br><span class="line">done</span><br><span class="line"></span><br><span class="line">sent 29 bytes  received 20 bytes  98.00 bytes/sec</span><br><span class="line"></span><br><span class="line">total size is 0  speedup is 0.00</span><br><span class="line"></span><br><span class="line">rsync error: some files could not be transferred (code 23) at /AppleInternal/Library/BuildRoots/97f6331a-ba75-11ed-a4bc-863efbbaf80d/Library/Caches/com.apple.xbs/Sources/rsync/rsync/main.c(996) [sender=2.6.9]</span><br><span class="line"></span><br><span class="line">Command PhaseScriptExecution failed with a nonzero exit code</span><br></pre></td></tr></table></figure></p>
+<h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h1><p>更改cocoaPods脚本</p>
+<p><code>readlink &quot;${source}&quot;</code></p>
+<p>改为</p>
+<p><code>readlink -f &quot;${source}&quot;</code></p>
+<h1 id="排查过程"><a href="#排查过程" class="headerlink" title="排查过程"></a>排查过程</h1><ol>
+<li><p>升级cocoaPods指最新版，但并没有什么用，可能他们还没来得及更新</p>
+</li>
+<li><p>rsync命令，可以用来同步文件，和cp、mv类似。检查出参入参了。把多余的可配置项去掉，于是得到了：</p>
+</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rsync </span><br><span class="line">"../../../IntermediateBuildFilesPath/UninstalledProducts/iphoneos/AFNetworking.framework" "/Users/xxx/Library/Developer/Xcode/DerivedData/xxx/Build/Intermediates.noindex/ArchiveIntermediates/xxx/InstallationBuildProductsLocation/Applications/xxx.app/Frameworks"</span><br></pre></td></tr></table></figure>
+<p> 等等！第一个路径参数为什么是个相对路径？</p>
+<ol start="3">
+<li>查cocoaPods脚本，以下为报错代码<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">if [ -r "$&#123;BUILT_PRODUCTS_DIR&#125;/$1" ]; then</span><br><span class="line">  local source="$&#123;BUILT_PRODUCTS_DIR&#125;/$1"</span><br><span class="line">elif [ -r "$&#123;BUILT_PRODUCTS_DIR&#125;/$(basename "$1")" ]; then</span><br><span class="line">  local source="$&#123;BUILT_PRODUCTS_DIR&#125;/$(basename "$1")"</span><br><span class="line">elif [ -r "$1" ]; then</span><br><span class="line">  local source="$1"</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">local destination="$&#123;TARGET_BUILD_DIR&#125;/$&#123;FRAMEWORKS_FOLDER_PATH&#125;"</span><br><span class="line"></span><br><span class="line">if [ -L "$&#123;source&#125;" ]; then</span><br><span class="line">  echo "Symlinked..."</span><br><span class="line">  source="$(readlink "$&#123;source&#125;")"</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">if [ -d "$&#123;source&#125;/$&#123;BCSYMBOLMAP_DIR&#125;" ]; then</span><br><span class="line"><span class="meta">  #</span><span class="bash"> Locate and install any .bcsymbolmaps <span class="keyword">if</span> present, and remove them from the .framework before the framework is copied</span></span><br><span class="line">  find "$&#123;source&#125;/$&#123;BCSYMBOLMAP_DIR&#125;" -name "*.bcsymbolmap"|while read f; do</span><br><span class="line">    echo "Installing $f"</span><br><span class="line">    install_bcsymbolmap "$f" "$destination"</span><br><span class="line">    rm "$f"</span><br><span class="line">  done</span><br><span class="line">  rmdir "$&#123;source&#125;/$&#123;BCSYMBOLMAP_DIR&#125;"</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Use filter instead of exclude so missing patterns don<span class="string">'t throw errors.</span></span></span><br><span class="line">echo "rsync --delete -av "$&#123;RSYNC_PROTECT_TMP_FILES[@]&#125;" --links --filter \"- CVS/\" --filter \"- .svn/\" --filter \"- .git/\" --filter \"- .hg/\" --filter \"- Headers\" --filter \"- PrivateHeaders\" --filter \"- Modules\" \"$&#123;source&#125;\" \"$&#123;destination&#125;\""</span><br><span class="line">rsync --delete -av "$&#123;RSYNC_PROTECT_TMP_FILES[@]&#125;" --links --filter "- CVS/" --filter "- .svn/" --filter "- .git/" --filter "- .hg/" --filter "- Headers" --filter "- PrivateHeaders" --filter "- Modules" "$&#123;source&#125;" "$&#123;destination&#125;"</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>那现在只需要追踪source的赋值。</p>
+<p>source第一次赋值的结果是一个软连接。</p>
+<p>接下来肯定会走下面判断中的代码去拿真实文件的路径，进行第二次赋值。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">if [ -L &quot;$&#123;source&#125;&quot; ]; then</span><br><span class="line">  echo &quot;Symlinked...&quot;</span><br><span class="line">  source=&quot;$(readlink &quot;$&#123;source&#125;&quot;)&quot;</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+<p>真相大白，<code>readlink &quot;${source}&quot;</code> 得到的结果就是一个相对路径。</p>
+<p>查一下<code>readlink</code>命令用法，发现它有个<code>-f</code>的可配置参数，拿到的是绝对路径。也就是最后我们用的解决方法。</p>
 </section>
     <!-- Tags START -->
     
       <div class="tags">
         <span>Tags:</span>
         
-  <a href="/tags#iOS" >
-    <span class="tag-code">iOS</span>
-  </a>
-
-  <a href="/tags#二维码" >
-    <span class="tag-code">二维码</span>
+  <a href="/tags#Xcode,iOS,rsync" >
+    <span class="tag-code">Xcode,iOS,rsync</span>
   </a>
 
       </div>
@@ -166,20 +180,13 @@
   <div class="nav-container">
     <!-- reverse left and right to put prev and next in a more logic postition -->
     
-      <a class="nav-left" href="/2016/11/21/python中的验证码识别库PyTesser的安装教程/">
+      <a class="nav-left" href="/2023/03/31/编码学习笔记一/">
         <span class="nav-arrow">← </span>
         
-          python中的验证码识别库PyTesser的安装教程
+          编码学习笔记一
         
       </a>
     
-    
-      <a class="nav-right" href="/2017/10/24/【已解决】Tengine启动报错nginx-emerg-invalid-port-in-resolver-2001-4860-4860-8844-in-usr-local-nginx/">
-        
-          【已解决】Tengine启动报错nginx: [emerg] invalid port in resolver &#34;2001:4860:4860::8844&#34; in /usr/local/nginx
-        
-        <span class="nav-arrow"> →</span>
-      </a>
     
   </div>
 
@@ -225,7 +232,7 @@
   <div class="toc-main">
     <strong class="toc-title">Catalog</strong>
     
-      <ol class="nav">none</ol>
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#现象"><span class="toc-nav-text">现象</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#解决方案"><span class="toc-nav-text">解决方案</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#排查过程"><span class="toc-nav-text">排查过程</span></a></li></ol>
     
   </div>
 </aside>
@@ -235,7 +242,7 @@
 
 <script>
   (function () {
-    var url = 'http://idev01.github.io/2016/11/24/iOS二维码限制扫描区域的问题记录/';
+    var url = 'http://idev01.github.io/2023/04/06/【已解决】Xcode-14-3-Archive-rsync报错/';
     var banner = ''
     if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
       $('#article-banner').css({
@@ -298,7 +305,7 @@
   <script>
     var disqus_shortname = 'idev-01';
     
-    var disqus_url = 'http://idev01.github.io/2016/11/24/iOS二维码限制扫描区域的问题记录/';
+    var disqus_url = 'http://idev01.github.io/2023/04/06/【已解决】Xcode-14-3-Archive-rsync报错/';
     
     (function(){
       var dsq = document.createElement('script');
